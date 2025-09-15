@@ -1,6 +1,6 @@
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "sunetra",
+    "password": "password",
     "database": "dashboard"
 }

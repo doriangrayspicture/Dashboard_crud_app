@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Edit Data{% endblock %}
+{% block content %}
+<div class="card shadow p-4">
+  <h4 class="mb-3">Edit Data</h4>
+
+  <!-- ✅ Add Particular Section -->
+  <div class="card mb-4 border-primary">
+    <div class="card-body">
+      <h5 class="card-title">Add New Particular</h5>
+      <form method="POST" class="row g-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="new_pname" placeholder="Enter particular name" required>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" name="add_particular" class="btn btn-primary w-100">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Select Date -->
+  <form method="POST" class="mb-4">
+    <div class="row g-3 align-items-end">
+      <div class="col-md-4">
+        <label for="date" class="form-label">Select Date</label>
+        <input type="date" class="form-control" id="date" name="date" required value="{{ selected_date }}">
+      </div>
+      <div class="col-md-2">
+        <button type="submit" name="fetch_date" class="btn btn-primary w-100">Fetch</button>
+      </div>
+    </div>
+  </form>
+
+  {% if rows %}
+  <!-- Editable Table -->
+  <form method="POST">
+    <input type="hidden" name="date" value="{{ selected_date }}">
+    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+      <table class="table table-bordered text-center align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Particular</th>
+            <th>MU</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+          <tr>
+            <td>{{ row.id }}</td>
+            <td>{{ row.pname }}</td>
+            <td>
+              <input type="number" step="any" class="form-control" name="mu_{{ row.id }}" value="{{ row.mu }}">
+            </td>
+            <td>
+              <input type="number" step="any" class="form-control" name="rate_{{ row.id }}" value="{{ row.rate }}">
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <button type="submit" name="update_data" class="btn btn-success mt-3">Update</button>
+  </form>
+  {% else %}
+    {% if selected_date %}
+      <p class="text-muted">No records found for this date.</p>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

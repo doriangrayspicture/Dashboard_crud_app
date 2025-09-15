@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Insert Data{% endblock %}
+{% block content %}
+<div class="card shadow p-4">
+  <h4 class="mb-3">Insert Data</h4>
+  <form method="POST">
+    <!-- Date field -->
+    <div class="mb-3">
+      <label for="date">Date:</label>
+      <input type="date" class="form-control" name="date" required>
+    </div>
+
+    <!-- Loop over particulars from DB -->
+    {% for p in particulars %}
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <input type="text" class="form-control" value="{{ p.pname }}" readonly>
+      </div>
+      <div class="col-md-3">
+        <input type="number" step="0.01" class="form-control" 
+               name="mu_{{ p.id }}" placeholder="MU">
+      </div>
+      <div class="col-md-3">
+        <input type="number" step="0.01" class="form-control" 
+               name="rate_{{ p.id }}" placeholder="Rate">
+      </div>
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success">Insert</button>
+  </form>
+  <p class="text-danger mt-3"><strong>* Note:</strong> Please fill all fields. If a value is not available, write <b>0</b>.</p>
+</div>
+{% endblock %}

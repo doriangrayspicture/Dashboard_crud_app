@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="height:80vh;">
+  <div class="card shadow p-4" style="width: 350px;">
+    <h3 class="text-center mb-3">Sign in</h3>
+    <form method="POST">
+      <div class="mb-3">
+        <input type="text" class="form-control" name="username" placeholder="Username" required>
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" name="password" placeholder="Password" required>
+      </div>
+      {% if error %}
+      <div class="alert alert-danger py-1">{{ error }}</div>
+      {% endif %}
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
